@@ -1,0 +1,283 @@
+#-- start of make_header -----------------
+
+#====================================
+#  Library Kpi
+#
+#   Generated Thu Aug 25 16:34:57 2016  by suym
+#
+#====================================
+
+include ${CMTROOT}/src/Makefile.core
+
+ifdef tag
+CMTEXTRATAGS = $(tag)
+else
+tag       = $(CMTCONFIG)
+endif
+
+cmt_Kpi_has_no_target_tag = 1
+
+#--------------------------------------------------------
+
+ifdef cmt_Kpi_has_target_tag
+
+tags      = $(tag),$(CMTEXTRATAGS),target_Kpi
+
+KpiAlg_tag = $(tag)
+
+ifdef READONLY
+cmt_local_tagfile_Kpi = /tmp/CMT_$(KpiAlg_tag)_Kpi.make$(cmt_lock_pid)
+else
+#cmt_local_tagfile_Kpi = $(KpiAlg_tag)_Kpi.make
+cmt_local_tagfile_Kpi = $(bin)$(KpiAlg_tag)_Kpi.make
+endif
+
+else
+
+tags      = $(tag),$(CMTEXTRATAGS)
+
+KpiAlg_tag = $(tag)
+
+ifdef READONLY
+cmt_local_tagfile_Kpi = /tmp/CMT_$(KpiAlg_tag).make$(cmt_lock_pid)
+else
+#cmt_local_tagfile_Kpi = $(KpiAlg_tag).make
+cmt_local_tagfile_Kpi = $(bin)$(KpiAlg_tag).make
+endif
+
+endif
+
+-include $(cmt_local_tagfile_Kpi)
+
+ifdef cmt_Kpi_has_target_tag
+
+ifdef READONLY
+cmt_final_setup_Kpi = /tmp/CMT_KpiAlg_Kpisetup.make
+cmt_local_Kpi_makefile = /tmp/CMT_Kpi$(cmt_lock_pid).make
+else
+cmt_final_setup_Kpi = $(bin)KpiAlg_Kpisetup.make
+cmt_local_Kpi_makefile = $(bin)Kpi.make
+endif
+
+else
+
+ifdef READONLY
+cmt_final_setup_Kpi = /tmp/CMT_KpiAlgsetup.make
+cmt_local_Kpi_makefile = /tmp/CMT_Kpi$(cmt_lock_pid).make
+else
+cmt_final_setup_Kpi = $(bin)KpiAlgsetup.make
+cmt_local_Kpi_makefile = $(bin)Kpi.make
+endif
+
+endif
+
+ifdef READONLY
+cmt_final_setup = /tmp/CMT_KpiAlgsetup.make
+else
+cmt_final_setup = $(bin)KpiAlgsetup.make
+endif
+
+Kpi ::
+
+
+ifdef READONLY
+Kpi ::
+	@echo tags=$(tags)
+	@echo cmt_local_tagfile=$(cmt_local_tagfile)
+endif
+
+
+dirs ::
+	@if test ! -r requirements ; then echo "No requirements file" ; fi; \
+	  if test ! -d $(bin) ; then $(mkdir) -p $(bin) ; fi
+
+javadirs ::
+	@if test ! -d $(javabin) ; then $(mkdir) -p $(javabin) ; fi
+
+srcdirs ::
+	@if test ! -d $(src) ; then $(mkdir) -p $(src) ; fi
+
+help ::
+	$(echo) 'Kpi'
+
+binobj = 
+ifdef STRUCTURED_OUTPUT
+binobj = Kpi/
+Kpi::
+	@if test ! -d $(bin)$(binobj) ; then $(mkdir) -p $(bin)$(binobj) ; fi
+	$(echo) "STRUCTURED_OUTPUT="$(bin)$(binobj)
+endif
+
+#-- end of make_header ------------------
+
+#-- start of libary_header ---------------
+
+Kpilibname   = $(bin)$(library_prefix)Kpi$(library_suffix)
+Kpilib       = $(Kpilibname).a
+Kpistamp     = $(bin)Kpi.stamp
+Kpishstamp   = $(bin)Kpi.shstamp
+
+Kpi :: dirs  KpiLIB
+	$(echo) "Kpi ok"
+
+#-- end of libary_header ----------------
+
+KpiLIB :: $(Kpilib) $(Kpishstamp)
+	@/bin/echo "------> Kpi : library ok"
+
+$(Kpilib) :: $(bin)Kpi.o
+	$(lib_echo) library
+	$(lib_silent) cd $(bin); \
+	  $(ar) $(Kpilib) $?
+	$(lib_silent) $(ranlib) $(Kpilib)
+	$(lib_silent) cat /dev/null >$(Kpistamp)
+
+#------------------------------------------------------------------
+#  Future improvement? to empty the object files after
+#  storing in the library
+#
+##	  for f in $?; do \
+##	    rm $${f}; touch $${f}; \
+##	  done
+#------------------------------------------------------------------
+
+$(Kpilibname).$(shlibsuffix) :: $(Kpilib) $(Kpistamps)
+	$(lib_silent) cd $(bin); QUIET=$(QUIET); $(make_shlib) "$(tags)" Kpi $(Kpi_shlibflags)
+
+$(Kpishstamp) :: $(Kpilibname).$(shlibsuffix)
+	@if test -f $(Kpilibname).$(shlibsuffix) ; then cat /dev/null >$(Kpishstamp) ; fi
+
+Kpiclean ::
+	$(cleanup_echo) objects
+	$(cleanup_silent) cd $(bin); /bin/rm -f $(bin)Kpi.o
+
+#-----------------------------------------------------------------
+#
+#  New section for automatic installation
+#
+#-----------------------------------------------------------------
+
+ifeq ($(INSTALLAREA),)
+installarea = $(CMTINSTALLAREA)
+else
+ifeq ($(findstring `,$(INSTALLAREA)),`)
+installarea = $(shell $(subst `,, $(INSTALLAREA)))
+else
+installarea = $(INSTALLAREA)
+endif
+endif
+
+install_dir = ${installarea}/${CMTCONFIG}/lib
+Kpiinstallname = $(library_prefix)Kpi$(library_suffix).$(shlibsuffix)
+
+Kpi :: Kpiinstall
+
+install :: Kpiinstall
+
+Kpiinstall :: $(install_dir)/$(Kpiinstallname)
+	@if test ! "${installarea}" = ""; then\
+	  echo "installation done"; \
+	fi
+
+$(install_dir)/$(Kpiinstallname) :: $(bin)$(Kpiinstallname)
+	@if test ! "${installarea}" = ""; then \
+	  cd $(bin); \
+	  if test ! "$(install_dir)" = ""; then \
+	    if test ! -d "$(install_dir)"; then \
+	      mkdir -p $(install_dir); \
+	    fi ; \
+	    if test -d "$(install_dir)"; then \
+	      echo "Installing library $(Kpiinstallname) into $(install_dir)"; \
+	      if test -e $(install_dir)/$(Kpiinstallname); then \
+	        $(cmt_uninstall_area_command) $(install_dir)/$(Kpiinstallname); \
+	        $(cmt_uninstall_area_command) $(install_dir)/$(Kpiinstallname).cmtref; \
+	      fi; \
+	      $(cmt_install_area_command) `pwd`/$(Kpiinstallname) $(install_dir)/$(Kpiinstallname); \
+	      echo `pwd`/$(Kpiinstallname) >$(install_dir)/$(Kpiinstallname).cmtref; \
+	    fi \
+          else \
+	    echo "Cannot install library $(Kpiinstallname), no installation directory specified"; \
+	  fi; \
+	fi
+
+Kpiclean :: Kpiuninstall
+
+uninstall :: Kpiuninstall
+
+Kpiuninstall ::
+	@if test ! "${installarea}" = ""; then \
+	  cd $(bin); \
+	  if test ! "$(install_dir)" = ""; then \
+	    if test -d "$(install_dir)"; then \
+	      echo "Removing installed library $(Kpiinstallname) from $(install_dir)"; \
+	      $(cmt_uninstall_area_command) $(install_dir)/$(Kpiinstallname); \
+	      $(cmt_uninstall_area_command) $(install_dir)/$(Kpiinstallname).cmtref; \
+	    fi \
+          else \
+	    echo "Cannot uninstall library $(Kpiinstallname), no installation directory specified"; \
+	  fi; \
+	fi
+
+
+
+
+#-- start of dependency ------------------
+ifneq ($(MAKECMDGOALS),Kpiclean)
+
+#$(bin)Kpi_dependencies.make :: dirs
+
+ifndef QUICK
+$(bin)Kpi_dependencies.make : ../src/Kpi.cxx $(use_requirements) $(cmt_final_setup_Kpi)
+	$(echo) "(Kpi.make) Rebuilding $@"; \
+	  $(build_dependencies) Kpi -all_sources -out=$@ ../src/Kpi.cxx
+endif
+
+#$(Kpi_dependencies)
+
+-include $(bin)Kpi_dependencies.make
+
+endif
+#-- end of dependency -------------------
+#-- start of cpp_library -----------------
+
+$(bin)Kpi_dependencies.make : $(Kpi_cxx_dependencies)
+
+$(bin)$(binobj)Kpi.o : $(Kpi_cxx_dependencies)
+	$(cpp_echo) $(src)Kpi.cxx
+	$(cpp_silent) $(cppcomp) -o $(@) $(use_pp_cppflags) $(Kpi_pp_cppflags) $(lib_Kpi_pp_cppflags) $(Kpi_pp_cppflags) $(use_cppflags) $(Kpi_cppflags) $(lib_Kpi_cppflags) $(Kpi_cppflags) $(Kpi_cxx_cppflags)  $(src)Kpi.cxx
+
+#-- end of cpp_library ------------------
+#-- start of cleanup_header --------------
+
+clean :: Kpiclean
+	@cd .
+
+ifndef PEDANTIC
+.DEFAULT::
+	$(echo) "(Kpi.make) $@: No rule for such target" >&2
+#	@echo "#CMT> Warning: $@: No rule for such target" >&2; exit
+else
+.DEFAULT::
+	$(echo) "(Kpi.make) PEDANTIC: $@: No rule for such target" >&2
+	if test $@ = "$(cmt_final_setup)" -o\
+	 $@ = "$(cmt_final_setup_Kpi)" ; then\
+	 found=n; for s in 1 2 3 4 5; do\
+	 sleep $$s; test ! -f $@ || { found=y; break; }\
+	 done; if test $$found = n; then\
+	 test -z "$(cmtmsg)" ||\
+	 echo "$(CMTMSGPREFIX)" "(Kpi.make) PEDANTIC: $@: Seems to be missing. Ignore it for now" >&2; exit 0 ; fi;\
+	 elif test `expr index $@ '/'` -ne 0 ; then\
+	 test -z "$(cmtmsg)" ||\
+	 echo "$(CMTMSGPREFIX)" "(Kpi.make) PEDANTIC: $@: Seems to be a missing file. Please check" >&2; exit 2 ; \
+	 else\
+	 test -z "$(cmtmsg)" ||\
+	 echo "$(CMTMSGPREFIX)" "(Kpi.make) PEDANTIC: $@: Seems to be a fake target due to some pattern. Just ignore it" >&2 ; exit 0; fi
+endif
+
+Kpiclean ::
+#-- end of cleanup_header ---------------
+#-- start of cleanup_library -------------
+	$(cleanup_echo) library
+	-$(cleanup_silent) cd $(bin); /bin/rm -f $(binobj)$(library_prefix)Kpi$(library_suffix).a $(binobj)$(library_prefix)Kpi$(library_suffix).s? $(binobj)Kpi.stamp $(binobj)Kpi.shstamp
+#-- end of cleanup_library ---------------
+

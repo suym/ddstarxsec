@@ -1,0 +1,26 @@
+#include "$ROOTIOROOT/share/jobOptions_ReadRec.txt"
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+#include "$MAGNETICFIELDROOT/share/MagneticField.txt"
+#include "$ABSCORROOT/share/jobOptions_AbsCor.txt"
+
+ApplicationMgr.DLLs += {"DD"};
+ApplicationMgr.TopAlg += { "DD" };
+
+// Input REC or DST file name 
+EventCnvSvc.digiRootInputFile = {
+"/besfs/groups/psip/psipgroup/664p01-MC/4260/res/DD/23.dst"
+};
+
+// Set output level threshold (2=DEBUG, 3=INFO, 4=WARNING, 5=ERROR, 6=FATAL )
+MessageSvc.OutputLevel = 5;
+
+// Number of events to be processed (default is 10)
+ //  ApplicationMgr.EvtMax = 1000;
+ ApplicationMgr.EvtMax = 1000;
+
+DD.OutputFileName="dd_test.root";
+//DD.IsMonteCarlo="false";
+ DD.IsMonteCarlo="true";
+
+
+				
