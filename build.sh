@@ -18,7 +18,6 @@ option=$1
 case $option in 
     1) echo "Building dd module..."
        cd Analysic/Physics/DD/DD-00-00-01/cmt/ 
-       cmt config
        source setup.sh
        make  
        ;;
