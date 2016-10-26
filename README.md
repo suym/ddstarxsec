@@ -2,7 +2,7 @@
 
 D D star cross section 
 
-## Install v0.2
+## Install v0.2 with developer account (suym) 
 
 > mkdir -p $HOME/bes/kpi
 
