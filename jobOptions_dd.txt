@@ -1,0 +1,35 @@
+#include "$ROOTIOROOT/share/jobOptions_ReadRec.txt"
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+#include "$MAGNETICFIELDROOT/share/MagneticField.txt"
+#include "$ABSCORROOT/share/jobOptions_AbsCor.txt"
+ApplicationMgr.DLLs += {"DD"};
+ApplicationMgr.TopAlg += { "DD" };
+
+// Input REC or DST file name 
+EventCnvSvc.digiRootInputFile = {
+//"/bes3fs/offline/data/664p01/xyz/4260/dst/130322/run_0031910_All_file001_SFO-1.dst"
+//" /bes3fs/offline/data/664p01/psip/mc/09dst/09psip_stream001_run8373_file6.dst"
+// "/bes3fs/offline/data/664p01/xyz/4260/dst/130103/run_0030096_All_file001_SFO-1.dst"
+//  "/bes3fs/offline/data/664p01/xyz/4260scan/4245/dst/130330/run_0032144_All_file005_SFO-1.dst"
+ // "/bes3fs/offline/data/664p01/xyz/4230/dst/130402/run_0032246_All_file002_SFO-2.dst"
+  //  "/bes3fs/offline/data/664p01/xyz/4260/dst/130103/run_0030096_All_file005_SFO-2.dst"
+   //  "/besfs/groups/psip/psipgroup/664p01-MC/4360/res/DD/1.dst"
+       "/besfs/groups/psip/psipgroup/664p01-MC/4260/res/DD/1.dst"
+   //  "/bes3fs/offline/data/664p01/xyz/4260/dst/121217/run_0029716_All_file006_SFO-1.dst"
+   //  "/bes3fs/offline/data/664p01/xyz/4360/dst/130127/run_0030616_All_file001_SFO-1.dst"
+};
+
+// Set output level threshold (2=DEBUG, 3=INFO, 4=WARNING, 5=ERROR, 6=FATAL )
+MessageSvc.OutputLevel = 5;
+
+// Number of events to be processed (default is 10)
+ //  ApplicationMgr.EvtMax = 1000;
+ ApplicationMgr.EvtMax = 1000;
+
+//DD.OutputFileName="dd_data_test.root";
+DD.OutputFileName="dd_mc_test.root";
+//DD.IsMonteCarlo="false";
+DD.IsMonteCarlo="true";
+
+
+				
