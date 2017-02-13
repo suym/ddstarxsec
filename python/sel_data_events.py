@@ -65,7 +65,8 @@ def main():
     check_outfile_path(outfile)
 
     fin = ROOT.TFile(infile)
-    t = fin.Get('mc')
+    #t = fin.Get('mc')
+    t = fin.Get('D0bar_kpi')
     entries = t.GetEntries()
 
     fout = ROOT.TFile(outfile, "RECREATE")
