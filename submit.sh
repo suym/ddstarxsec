@@ -42,6 +42,21 @@ usage() {
     printf "\n\t%-5s  %-40s\n"  "0.1.29"    "Split data_4245 sample with each group 10G"
     printf "\n\t%-5s  %-40s\n"  "0.1.30"    "Split data_4310 sample with each group 10G"
     printf "\n\t%-5s  %-40s\n"  "0.1.31"    "Split data_4390 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.32"    "Split data_3890 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.33"    "Split data_3950 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.34"    "Split data_3980 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.35"    "Split data_new_4190 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.36"    "Split data_new_4200 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.37"    "Split data_new_4210 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.38"    "Split data_new_4220 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.39"    "Split data_4030 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.40"    "Split data_4040 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.41"    "Split data_4055 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.42"    "Split data_4070 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.43"    "Split data_4120 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.44"    "Split data_4140 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.45"    "Split data_4150 sample with each group 10G"
+    printf "\n\t%-5s  %-40s\n"  "0.1.46"    "Split data_4170 sample with each group 10G"
     printf "\n\t%-5s  %-40s\n"  "0.2"      "[run on MC sample]"
     printf "\n\t%-5s  %-40s\n"  "0.2.1"    "Run with a few samples"
     printf "\n\t%-5s  %-40s\n"  "0.2.2"    "Split psi4260 MC sample with each group 4G"
@@ -207,6 +222,66 @@ case $option in
     0.1.31) echo "Split data_4390 sample with each group 10G ..."
 	   ./python/get_samples.py  /bes3fs/offline/data/664p01/xyz/4360scan/4390/dst  $HOME/bes/kpi/v0.2/run/samples/data_664p01_xyz4390.txt 10G
 	   # made 34 groups 
+	   ;;
+    0.1.32) echo "Split data_3890 sample with each group 10G ..."
+	   ./python/get_samples.py  3890MeV    /bes3fs/offline/data/665p01/rscan/dst   $HOME/bes/kpi/v0.2/run/samples/data_665p01_xyz3890.txt 10G
+	   # made 8 groups 
+	   ;;
+    0.1.33) echo "Split data_3950 sample with each group 10G ..."
+	   ./python/get_samples.py  3950MeV    /bes3fs/offline/data/665p01/rscan/dst   $HOME/bes/kpi/v0.2/run/samples/data_665p01_xyz3950.txt 10G
+	   # made 7 groups 
+	   ;;
+    0.1.34) echo "Split data_3980 sample with each group 10G ..."
+	   ./python/get_samples.py  3980MeV    /bes3fs/offline/data/665p01/rscan/dst   $HOME/bes/kpi/v0.2/run/samples/data_665p01_xyz3980.txt 10G
+	   # made 6 groups 
+	   ;;
+    0.1.35) echo "Split data_new_4190 sample with each group 10G ..."
+	   ./python/get_samples.py       /besfs/offline/data/702p01/xyz/4190/dst   $HOME/bes/kpi/v0.2/run/samples/data_702p01_xyznew_4190.txt 10G
+	   # made 397 groups 
+	   ;;
+    0.1.36) echo "Split data_new_4200 sample with each group 10G ..."
+	   ./python/get_samples.py       /besfs/offline/data/702p01/xyz/4200/dst   $HOME/bes/kpi/v0.2/run/samples/data_702p01_xyznew_4200.txt 10G
+	   # made 370 groups 
+	   ;;
+    0.1.37) echo "Split data_new_4210 sample with each group 10G ..."
+	   ./python/get_samples.py       /besfs/offline/data/702p01/xyz/4210/dst   $HOME/bes/kpi/v0.2/run/samples/data_702p01_xyznew_4210.txt 10G
+	   # made 413 groups 
+	   ;;
+    0.1.38) echo "Split data_new_4220 sample with each group 10G ..."
+	   ./python/get_samples.py       /besfs/offline/data/702p01/xyz/4220/dst   $HOME/bes/kpi/v0.2/run/samples/data_702p01_xyznew_4220.txt 10G
+	   # made 95 groups 
+	   ;;
+    0.1.39) echo "Split data_4030 sample with each group 10G ..."
+	   ./python/get_samples.py  4030MeV    /bes3fs/offline/data/665p01/rscan/dst   $HOME/bes/kpi/v0.2/run/samples/data_665p01_xyz4030.txt 10G
+	   # made 13 groups 
+	   ;;
+    0.1.40) echo "Split data_4040 sample with each group 10G ..."
+	   ./python/get_samples.py  4040MeV    /bes3fs/offline/data/665p01/rscan/dst   $HOME/bes/kpi/v0.2/run/samples/data_665p01_xyz4040.txt 10G
+	   # made 5 groups 
+	   ;;
+    0.1.41) echo "Split data_4055 sample with each group 10G ..."
+	   ./python/get_samples.py  4055MeV    /bes3fs/offline/data/665p01/rscan/dst   $HOME/bes/kpi/v0.2/run/samples/data_665p01_xyz4055.txt 10G
+	   # made 5 groups 
+	   ;;
+    0.1.42) echo "Split data_4070 sample with each group 10G ..."
+	   ./python/get_samples.py  4070MeV    /bes3fs/offline/data/665p01/rscan/dst   $HOME/bes/kpi/v0.2/run/samples/data_665p01_xyz4070.txt 10G
+	   # made 5 groups 
+	   ;;
+    0.1.43) echo "Split data_4120 sample with each group 10G ..."
+	   ./python/get_samples.py  4120MeV    /bes3fs/offline/data/665p01/rscan/dst   $HOME/bes/kpi/v0.2/run/samples/data_665p01_xyz4120.txt 10G
+	   # made 6 groups 
+	   ;;
+    0.1.44) echo "Split data_4140 sample with each group 10G ..."
+	   ./python/get_samples.py  4140MeV    /bes3fs/offline/data/665p01/rscan/dst   $HOME/bes/kpi/v0.2/run/samples/data_665p01_xyz4140.txt 10G
+	   # made 6 groups 
+	   ;;
+    0.1.45) echo "Split data_4150 sample with each group 10G ..."
+	   ./python/get_samples.py  4150MeV    /bes3fs/offline/data/665p01/rscan/dst   $HOME/bes/kpi/v0.2/run/samples/data_665p01_xyz4150.txt 10G
+	   # made 6 groups 
+	   ;;
+    0.1.46) echo "Split data_4170 sample with each group 10G ..."
+	   ./python/get_samples.py  4170MeV    /bes3fs/offline/data/665p01/rscan/dst   $HOME/bes/kpi/v0.2/run/samples/data_665p01_xyz4170.txt 10G
+	   # made 18 groups 
 	   ;;
 
 
