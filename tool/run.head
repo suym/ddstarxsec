@@ -1,0 +1,32 @@
+#! /bin/csh -f
+setenv BELLE_LEVEL b20090127_0910
+setenv BELLE_DEBUG opt
+#setenv MY_TOP_DIR $HOME/belle
+
+#For case A
+#    unsetenv USE_GRAND_REPROCESS_DATA
+#For case B 
+     setenv USE_GRAND_REPROCESS_DATA 1
+
+
+source /sw/belle/local/etc/cshrc_general
+limit coredumpsize 0
+setenv BASF_USER_IF basfsh.so
+setenv BASF_NPROCESS 0
+
+basf << eod >& ./y4s_exp37_48.log
+path create main
+path add_module main fix_mdst gjj
+  path add_condition main <:0:KILL
+  path add_condition main >=:0:EXIT
+
+#When reading exp65 1S run-indep. (i.e. runno.=0) MC mdst, 
+#you need to specify the following parameter in your script:
+
+#module put_parameter fix_mdst Correct_ecl_5s\1
+#module put_parameter fix_mdst Scale_error\0
+module put_parameter gjj mc\0
+
+initialize
+
+histogram define ./y4s_exp37_48.hbk

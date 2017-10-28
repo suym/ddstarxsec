@@ -1,0 +1,70 @@
+#!/bin/sh
+
+
+#--------------------------------------------------
+# Prompt Setting
+#--------------------------------------------------
+HOST=$(hostname | cut -d. -f1)
+if [ "$PS1" ]; then
+  PS1="\u_$HOST$ "
+  ignoreeof=1
+fi
+
+
+#--------------------------------------------------
+# General Aliases
+#--------------------------------------------------
+alias ls="ls -h --color"
+alias lsd="ls -d */"
+alias l="ls"
+alias ll="ls -lh"
+alias lm="ls -al"
+alias p="pwd"
+alias rm="rm -i"
+alias du="du -h"
+#alias rl="root -l" 
+alias ph="cd /afs/ihep.ac.cn/users/s/suym/bes/kpi/v0.2/Analysic/Physics"
+alias ru="cd /besfs/users/suym/6.6.4.p01/run"
+#alias suym="qstat -u suym"
+alias suym="hep_q -u suym"
+alias pl="cd /besfs/users/suym/6.6.4.p01/Analysis/plot/python_doc"
+alias root="root -l"
+alias run="cd /besfs/groups/nphy/users/suym/run"
+alias fl="cd /besfs/groups/nphy/users/xiaosy/yumo"
+#source /afs/ihep.ac.cn/users/s/suym/bes/kpi/v0.2/besenv/cmthome-6.6.4.p01/setupCVS.sh
+#source /afs/ihep.ac.cn/users/s/suym/bes/kpi/v0.2/besenv/cmthome-6.6.4.p01/setupCMT.sh
+#source /afs/ihep.ac.cn/users/s/suym/bes/kpi/v0.2/besenv/cmthome-6.6.4.p01/setup.sh
+#source /afs/ihep.ac.cn/users/s/suym/bes/kpi/v0.2/TestRelease/TestRelease-00-00-80/cmt/setup.sh
+#--------------------------------------------------
+# General ENV
+#--------------------------------------------------
+export CVS_RSH=ssh
+export CVSEDITOR=vim
+export PATH=$HOME/local/bin:$PATH
+#export PATH=/afs/ihep.ac.cn/soft/common/sysgroup/hep_job/bin5:$PATH #lxslc5 ~664p01
+export PATH=/afs/ihep.ac.cn/soft/common/sysgroup/hep_job/bin:$PATH #lxslc6 665p01~
+unset SSH_ASKPASS  
+
+#export PYTHONPATH=$HOME/suym_local/.pyenv/versions/2.7.1/lib
+#export LD_LIBRARY_PATH=$HOME/suym_local/.pyenv/versions/2.7.1/lib:/afs/ihep.ac.cn/users/s/suym/suym_local/Anaconda2/lib:$LD_LIBRARY_PATH
+#export TCL_LIBRARY_PATH=$HOME/suym_local/.pyenv/versions/2.7.1/lib:/afs/ihep.ac.cn/users/s/suym/suym_local/Anaconda2/lib:$TCL_LIBRARY_PATH
+#export QT_XKB_CONFIG_ROOT=/afs/ihep.ac.cn/users/s/suym/suym_local/Anaconda2/lib:$QT_XKB_CONFIG_ROOT
+#export PATH=$HOME/suym_local/.pyenv/versions/2.7.1/bin:$PATH
+
+#--------------------------------------------------
+# Functions 
+#--------------------------------------------------
+
+batch_kill() {
+    pgrep $1 | awk '{print  "kill -9 "$1}' | sh  
+}
+
+setpyroot() {
+    echo "Setting up python 2.7.11 and ROOT 5.34..."
+    export LD_LIBRARY_PATH=$HOME/local/lib
+    source $HOME/local/root/bin/thisroot.sh
+}
+
+
+# added by Anaconda2 4.2.0 installer
+export PATH="/afs/ihep.ac.cn/users/s/suym/suym_local/Anaconda2/bin:$PATH"
